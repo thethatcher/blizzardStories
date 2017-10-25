@@ -25,8 +25,7 @@ $(document).on("click", ".articleCard", function() {
   })
     // With that done, add the note information to the page
     .done(function(data) {
-      //TODO for loop to render all old comments below the input.
-      console.log(data);
+      console.log(data.note);
       // The title of the article
       $("#notes").append("<h2>" + data.title + "</h2>");
       // An input to enter a new title
@@ -41,6 +40,13 @@ $(document).on("click", ".articleCard", function() {
         $("#titleinput").val(data.note.title);
         // Place the body of the note in the body textarea
         $("#bodyinput").val(data.note.body);
+      }
+
+      for (var i = 0; i < data.note.length; i++) {
+        data.note[i]
+        $('#notes').append('<div class="noteCard" id="' + data.note[i]._id + '"></div>');
+        $('#' + data.note[i]._id).append('<h3>' + data.note[i].title + '</h3>');
+        $('#' + data.note[i]._id).append('<p>' + data.note[i].body + '</p>');
       }
     });
 });
